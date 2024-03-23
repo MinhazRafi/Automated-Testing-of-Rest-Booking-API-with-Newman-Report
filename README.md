@@ -68,31 +68,31 @@ This project demonstrates API testing using Postman, providing a collection of t
 ### Request Method: POST
 ### Pre-request Script:
 ```console 
-    var firstName = pm.variables.replaceIn("{{$randomFirstName}}")
-    pm.environment.set("firstName", firstName)
+var firstName = pm.variables.replaceIn("{{$randomFirstName}}")
+pm.environment.set("firstName", firstName)
 
-    var lastName = pm.variables.replaceIn("{{$randomLastName}}")
-    pm.environment.set("lastName", lastName)
+var lastName = pm.variables.replaceIn("{{$randomLastName}}")
+pm.environment.set("lastName", lastName)
 
-    var totalPrice = pm.variables.replaceIn("{{$randomInt}}")
-    pm.environment.set("totalPrice", totalPrice)
+var totalPrice = pm.variables.replaceIn("{{$randomInt}}")
+pm.environment.set("totalPrice", totalPrice)
 
-    var depositPaid = pm.variables.replaceIn("{{$randomBoolean}}")
-    pm.environment.set("depositPaid", depositPaid)
+var depositPaid = pm.variables.replaceIn("{{$randomBoolean}}")
+pm.environment.set("depositPaid", depositPaid)
     
-    //Date
-    const date = require('moment')
-    const today = date()
+//Date
+const date = require('moment')
+const today = date()
     
-    // var checkinPast = today.subtract(7, 'd').format("YYYY-MM-DD")
-    var checkin = today.add(2, 'd').format("YYYY-MM-DD")
-    pm.environment.set("checkin", checkin)
+// var checkinPast = today.subtract(7, 'd').format("YYYY-MM-DD")
+var checkin = today.add(2, 'd').format("YYYY-MM-DD")
+pm.environment.set("checkin", checkin)
     
-    var checkout = today.add(4, 'd').format("YYYY-MM-DD")
-    pm.environment.set("checkout", checkout)
+var checkout = today.add(4, 'd').format("YYYY-MM-DD")
+pm.environment.set("checkout", checkout)
     
-    var additionalNeeds = pm.variables.replaceIn("{{$randomProduct}}")
-    pm.environment.set("additionalNeeds", additionalNeeds)
+var additionalNeeds = pm.variables.replaceIn("{{$randomProduct}}")
+pm.environment.set("additionalNeeds", additionalNeeds)
 ```
   **Request Body:** 
  ```console 
@@ -148,53 +148,53 @@ if(responseCode == 200){
 ### Request Body: None
 ### Tests:
  ```console 
-        var responseCode = pm.response.code
-        console.log(responseCode)
+ var responseCode = pm.response.code
+ console.log(responseCode)
         
-        if(responseCode==200){
-                var jsonData = pm.response.json()
+ if(responseCode==200){
+ var jsonData = pm.response.json()
         
-                pm.test("First Name Validation", function(){
-                    pm.expect(pm.environment.get("firstName")).to.eql(jsonData.firstname)
-                })
+ pm.test("First Name Validation", function(){
+  pm.expect(pm.environment.get("firstName")).to.eql(jsonData.firstname)
+ })
         
-                pm.test("Last Name Validation", function(){
-                    pm.expect(pm.environment.get("lastName")).to.eql(jsonData.lastname)
-                })
+ pm.test("Last Name Validation", function(){
+  pm.expect(pm.environment.get("lastName")).to.eql(jsonData.lastname)
+ })
         
-                pm.test("Total Price Validation", function(){
-                    pm.expect(pm.environment.get("totalPrice")).to.eql(jsonData.totalprice.toString())
-                })
+ pm.test("Total Price Validation", function(){
+  pm.expect(pm.environment.get("totalPrice")).to.eql(jsonData.totalprice.toString())
+ })
         
-                pm.test("Deposit Paid Validation", function(){
-                    pm.expect(pm.environment.get("depositPaid")).to.eql(jsonData.depositpaid.toString())
-                })
+ pm.test("Deposit Paid Validation", function(){
+   pm.expect(pm.environment.get("depositPaid")).to.eql(jsonData.depositpaid.toString())
+ })
         
-                pm.test("Check-In Date Validation", function(){
-                    pm.expect(pm.environment.get("checkin")).to.eql(jsonData.bookingdates.checkin)
-                })
+ pm.test("Check-In Date Validation", function(){
+   pm.expect(pm.environment.get("checkin")).to.eql(jsonData.bookingdates.checkin)
+ })
         
-                pm.test("Check-Out Date Validation", function(){
-                    pm.expect(pm.environment.get("checkout")).to.eql(jsonData.bookingdates.checkout)
-                })
+ pm.test("Check-Out Date Validation", function(){
+    pm.expect(pm.environment.get("checkout")).to.eql(jsonData.bookingdates.checkout)
+ })
         
-                pm.test("Status code is 200", function () {
-                    pm.response.to.have.status(200);
-                });
+ pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+ });
         
-                pm.test("Additional Needs Validation", function(){
-                    pm.expect(pm.environment.get("additionalNeeds")).to.eql(jsonData.additionalneeds)
-                })
-        }
-          else if(responseCode==404){
-            pm.test("Not Found")
-        }
-          else if(responseCode==500){
-            pm.test("Server Error")
-        }
-          else{
-            pm.test("Something went wrong. Please check it")
-        }
+ pm.test("Additional Needs Validation", function(){
+     pm.expect(pm.environment.get("additionalNeeds")).to.eql(jsonData.additionalneeds)
+ })
+ }
+ else if(responseCode==404){
+     pm.test("Not Found")
+ }
+ else if(responseCode==500){
+     pm.test("Server Error")
+ }
+ else{
+     pm.test("Something went wrong. Please check it")
+ }
 ```
   **Response Body:**
  ```console
@@ -234,33 +234,33 @@ if(responseCode == 200){
 ### Request Method: PUT
 ### Pre-request Script:
 ```console 
-    var firstName = pm.variables.replaceIn("{{$randomFirstName}}")
-    console.log(firstName)
-    pm.environment.set("firstName", firstName)
+var firstName = pm.variables.replaceIn("{{$randomFirstName}}")
+console.log(firstName)
+pm.environment.set("firstName", firstName)
     
-    var lastName = pm.variables.replaceIn("{{$randomLastName}}")
-    console.log(lastName)
-    pm.environment.set("lastName", lastName)
+var lastName = pm.variables.replaceIn("{{$randomLastName}}")
+console.log(lastName)
+pm.environment.set("lastName", lastName)
     
-    var totalPrice = pm.variables.replaceIn("{{$randomInt}}")
-    pm.environment.set("totalPrice", totalPrice)
+var totalPrice = pm.variables.replaceIn("{{$randomInt}}")
+pm.environment.set("totalPrice", totalPrice)
     
-    var depositPaid = pm.variables.replaceIn("{{$randomBoolean}}")
-    pm.environment.set("depositPaid", depositPaid)
+var depositPaid = pm.variables.replaceIn("{{$randomBoolean}}")
+pm.environment.set("depositPaid", depositPaid)
     
-    // Date
-    const date = require('moment')
-    const today = date()
+// Date
+const date = require('moment')
+const today = date()
     
-    // var checkinPast = today.subtract(7, 'd').format("YYYY-MM-DD")
-    var checkin = today.add(2, 'd').format("YYYY-MM-DD")
-    pm.environment.set("checkin", checkin)
+// var checkinPast = today.subtract(7, 'd').format("YYYY-MM-DD")
+var checkin = today.add(2, 'd').format("YYYY-MM-DD")
+pm.environment.set("checkin", checkin)
     
-    var checkout = today.add(4, 'd').format("YYYY-MM-DD")
-    pm.environment.set("checkout", checkout)
+var checkout = today.add(4, 'd').format("YYYY-MM-DD")
+pm.environment.set("checkout", checkout)
     
-    var additionalNeeds = pm.variables.replaceIn("{{$randomProduct}}")
-    pm.environment.set("additionalNeeds", additionalNeeds)
+var additionalNeeds = pm.variables.replaceIn("{{$randomProduct}}")
+pm.environment.set("additionalNeeds", additionalNeeds)
 ```
   **Request Body:** 
  ```console 
@@ -313,56 +313,56 @@ if(responseCode == 200){
 ### Pre-request Script: None
 ### Tests:
 ```console
-    var responseCode = pm.response.code
-    console.log(responseCode)
+var responseCode = pm.response.code
+console.log(responseCode)
     
-    if(responseCode==200){
-            var jsonData = pm.response.json()
+ if(responseCode==200){
+  var jsonData = pm.response.json()
     
-            pm.test("First Name Validation", function(){
-                pm.expect(pm.environment.get("firstName")).to.eql(jsonData.firstname)
-            })
+pm.test("First Name Validation", function(){
+ pm.expect(pm.environment.get("firstName")).to.eql(jsonData.firstname)
+})
     
-            pm.test("Last Name Validation", function(){
-                pm.expect(pm.environment.get("lastName")).to.eql(jsonData.lastname)
-            })
+pm.test("Last Name Validation", function(){
+ pm.expect(pm.environment.get("lastName")).to.eql(jsonData.lastname)
+})
     
-            pm.test("Total Price Validation", function(){
-                pm.expect(pm.environment.get("totalPrice")).to.eql(jsonData.totalprice.toString())
-            })
+pm.test("Total Price Validation", function(){
+ pm.expect(pm.environment.get("totalPrice")).to.eql(jsonData.totalprice.toString())
+})
     
-            pm.test("Deposit Paid Validation", function(){
-                pm.expect(pm.environment.get("depositPaid")).to.eql(jsonData.depositpaid.toString())
-            })
+pm.test("Deposit Paid Validation", function(){
+ pm.expect(pm.environment.get("depositPaid")).to.eql(jsonData.depositpaid.toString())
+})
     
-            pm.test("Check-In Date Validation", function(){
-                pm.expect(pm.environment.get("checkin")).to.eql(jsonData.bookingdates.checkin)
-            })
+pm.test("Check-In Date Validation", function(){
+ pm.expect(pm.environment.get("checkin")).to.eql(jsonData.bookingdates.checkin)
+})
     
-            pm.test("Check-Out Date Validation", function(){
-                pm.expect(pm.environment.get("checkout")).to.eql(jsonData.bookingdates.checkout)
-            })
+pm.test("Check-Out Date Validation", function(){
+ pm.expect(pm.environment.get("checkout")).to.eql(jsonData.bookingdates.checkout)
+})
     
-            pm.test("Status code is 200", function () {
-                pm.response.to.have.status(200);
-            });
+pm.test("Status code is 200", function () {
+ pm.response.to.have.status(200);
+});
     
-            pm.test("Additional Needs Validation", function(){
-                pm.expect(pm.environment.get("additionalNeeds")).to.eql(jsonData.additionalneeds)
-            })
-    }
-        else if(responseCode==404)
-    {
-        pm.test("Not Found")
-    }
-        else if(responseCode==500)
-    {
-        pm.test("Internal Server Error")
-    }
-        else
-    {
-        pm.test("Something went wrong. Please check it")
-    }
+pm.test("Additional Needs Validation", function(){
+ pm.expect(pm.environment.get("additionalNeeds")).to.eql(jsonData.additionalneeds)
+ })
+}
+  else if(responseCode==404)
+{
+  pm.test("Not Found")
+}
+  else if(responseCode==500)
+{
+  pm.test("Internal Server Error")
+}
+  else
+{
+  pm.test("Something went wrong. Please check it")
+}
 ```
  **Response Body:** 
  ```console
@@ -385,40 +385,42 @@ if(responseCode == 200){
 ### Request Method: PATCH
 ### Pre-request Script:
 ```console
-    var partialUpdatedFirstName = pm.variables.replaceIn("{{$randomFirstName}}")
-    var partialUpdatedLastName = pm.variables.replaceIn("{{$randomLastName}}")
-    var partialUpdatedTotalPrice = pm.variables.replaceIn("{{$randomInt}}")
-    var partialUpdatedDepositPaid = pm.variables.replaceIn("{{$randomBoolean}}")
-    var partialUpdatedAdditionalNeeds = pm.variables.replaceIn("{{$randomProduct}}")
+var partialUpdatedFirstName = pm.variables.replaceIn("{{$randomFirstName}}")
+var partialUpdatedLastName = pm.variables.replaceIn("{{$randomLastName}}")
+var partialUpdatedTotalPrice = pm.variables.replaceIn("{{$randomInt}}")
+var partialUpdatedDepositPaid = pm.variables.replaceIn("{{$randomBoolean}}")
+var partialUpdatedAdditionalNeeds = pm.variables.replaceIn("{{$randomProduct}}")
     
-    // Date
-    const date = require('moment')
-    const today = date()
+// Date
+const date = require('moment')
+const today = date()
     
-    var partialUpdatedCheckIn = today.add(2, 'd').format("YYYY-MM-DD")
-    var partialUpdatedCheckOut = today.add(4, 'd').format("YYYY-MM-DD")
+var partialUpdatedCheckIn = today.add(2, 'd').format("YYYY-MM-DD")
+var partialUpdatedCheckOut = today.add(4, 'd').format("YYYY-MM-DD")
     
-    pm.environment.set("partialUpdatedAdditionalNeeds", partialUpdatedAdditionalNeeds)
-    pm.environment.set("partialUpdatedTotalPrice", partialUpdatedTotalPrice)
+pm.environment.set("partialUpdatedAdditionalNeeds", partialUpdatedAdditionalNeeds)
+pm.environment.set("partialUpdatedTotalPrice", partialUpdatedTotalPrice)
 ```
  **Request Body:** 
  ```console
-    {
-    	"totalprice" : {{partialUpdatedTotalPrice}},
-    	"additionalneeds" : "{{partialUpdatedAdditionalNeeds}}"
-    }
+ {
+ "totalprice" : {{partialUpdatedTotalPrice}},
+ "additionalneeds" : "{{partialUpdatedAdditionalNeeds}}"
+ }
 ```
  **Tests:** 
  ```console
-    var responseCode = pm.response.code
+ var responseCode = pm.response.code
     
-    if(responseCode == 200){
-        pm.test("Booking Data Partial Updated Successfully", function(){
-            pm.response.to.have.status(200);
-        })
-    } else {
-        pm.test("Something went wrong. Please check again")
-    }
+ if(responseCode == 200){
+ pm.test("Booking Data Partial Updated Successfully", function(){
+ pm.response.to.have.status(200);
+ })
+ }
+else
+{
+  pm.test("Something went wrong. Please check again")
+ }
 ```
  **Response Body:** 
  ```console
@@ -442,56 +444,65 @@ if(responseCode == 200){
 ### Request Body: None
 ### Tests:
 ```console
-    var responseCode = pm.response.code
-    console.log(responseCode)
+var responseCode = pm.response.code
+console.log(responseCode)
     
-    if(responseCode==200){
-            var jsonData = pm.response.json()
-    
-            pm.test("First Name Validation", function(){
-                pm.expect(pm.environment.get("firstName")).to.eql(jsonData.firstname)
-            })
-    
-            pm.test("Last Name Validation", function(){
-                pm.expect(pm.environment.get("lastName")).to.eql(jsonData.lastname)
-            })
-    
-            pm.test("Total Price Validation", function(){
-                pm.expect(pm.environment.get("partialUpdatedTotalPrice")).to.eql(jsonData.totalprice.toString())
-            })
-    
-            pm.test("Deposit Paid Validation", function(){
-                pm.expect(pm.environment.get("depositPaid")).to.eql(jsonData.depositpaid.toString())
-            })
-    
-            pm.test("Check-In Date Validation", function(){
-                pm.expect(pm.environment.get("checkin")).to.eql(jsonData.bookingdates.checkin)
-            })
-    
-            pm.test("Check-Out Date Validation", function(){
-                pm.expect(pm.environment.get("checkout")).to.eql(jsonData.bookingdates.checkout)
-            })
-    
-            pm.test("Status code is 200", function () {
-                pm.response.to.have.status(200);
-            });
-    
-            pm.test("Additional Needs Validation", function(){
-                pm.expect(pm.environment.get("partialUpdatedAdditionalNeeds")).to.eql(jsonData.additionalneeds)
-            })
-    }
-        else if(responseCode==404)
-    {
-        pm.test("Not Found")
-    }
-        else if(responseCode==500)
-    {
-        pm.test("Server Error")
-    }
-        else
-    {
-        pm.test("Something went wrong. Please check it")
-    }
+if(responseCode==200){
+var jsonData = pm.response.json()
+ 
+pm.test("First Name Validation", function()
+{
+pm.expect(pm.environment.get("firstName")).to.eql(jsonData.firstname)
+})
+
+pm.test("Last Name Validation", function()
+{
+pm.expect(pm.environment.get("lastName")).to.eql(jsonData.lastname)
+})
+
+pm.test("Total Price Validation", function()
+{
+pm.expect(pm.environment.get("partialUpdatedTotalPrice")).to.eql(jsonData.totalprice.toString())
+})
+  
+pm.test("Deposit Paid Validation", function()
+{
+pm.expect(pm.environment.get("depositPaid")).to.eql(jsonData.depositpaid.toString())
+})
+  
+pm.test("Check-In Date Validation", function()
+{
+pm.expect(pm.environment.get("checkin")).to.eql(jsonData.bookingdates.checkin)
+})
+
+pm.test("Check-Out Date Validation", function()
+{
+pm.expect(pm.environment.get("checkout")).to.eql(jsonData.bookingdates.checkout)
+})
+  
+pm.test("Status code is 200", function ()
+{
+ pm.response.to.have.status(200);
+});
+
+pm.test("Additional Needs Validation", function()
+{
+pm.expect(pm.environment.get("partialUpdatedAdditionalNeeds")).to.eql(jsonData.additionalneeds)
+})
+
+}
+else if(responseCode==404)
+{
+pm.test("Not Found")
+}
+else if(responseCode==500)
+{
+pm.test("Server Error")
+}
+else
+{
+pm.test("Something went wrong. Please check it")
+}
 ```
  **Response Body:** 
  ```console
@@ -523,21 +534,21 @@ if(responseCode == 200){
 ### Request Body: None
 ### Tests:
 ```console
-    var responseCode = pm.response.code
+var responseCode = pm.response.code
     
-    console.log(responseCode)
+console.log(responseCode)
     
-    if(responseCode==404){
-        pm.test("Deleted Successfully")
-    }
-    else if(responseCode==500)
-    {
-        pm.test("Internal Server Error")
-    }
-    else
-    {
-        pm.test("Something went wrong. Please check it")
-    }
+if(responseCode==404){
+pm.test("Deleted Successfully")
+}
+else if(responseCode==500)
+{
+ pm.test("Internal Server Error")
+}
+else
+{
+ pm.test("Something went wrong. Please check it")
+}
 ```
  **Response Body:** 
 ```console
@@ -554,7 +565,7 @@ newman run Booking.postman_collection.json -e Booking.postman_environment.json -
 ```
 
 ## Newman Report Summary:
-![image](https://github.com/MinhazRafi/Automated-Testing-of-Rest-Booking-API-with-Newman-Report/assets/77951772/50ea5800-6d2f-46be-9659-e63d9518a012)
-![image](https://github.com/MinhazRafi/Automated-Testing-of-Rest-Booking-API-with-Newman-Report/assets/77951772/7df491ff-9741-4501-bc8e-aa8f8b18c36f)
-![image](https://github.com/MinhazRafi/Automated-Testing-of-Rest-Booking-API-with-Newman-Report/assets/77951772/12f6935e-fb2e-4230-a9ae-fde1630ff0f3)
-![image](https://github.com/MinhazRafi/Automated-Testing-of-Rest-Booking-API-with-Newman-Report/assets/77951772/aa5fa6b5-0c95-4b12-a033-37e24617173a)
+![image](https://github.com/MinhazRafi/Automated-Testing-of-Rest-Booking-API-with-Newman-Report/assets/77951772/ba6be7cc-8d7a-4fb4-bd03-13719debb0fb)
+![image](https://github.com/MinhazRafi/Automated-Testing-of-Rest-Booking-API-with-Newman-Report/assets/77951772/3f8057e6-82c1-4b84-8c63-1b0e8553811e)
+![image](https://github.com/MinhazRafi/Automated-Testing-of-Rest-Booking-API-with-Newman-Report/assets/77951772/10fc1c83-3906-4647-a599-b625dbd96297)
+![image](https://github.com/MinhazRafi/Automated-Testing-of-Rest-Booking-API-with-Newman-Report/assets/77951772/779e20cb-eb42-467c-96c8-89e35b164221)
