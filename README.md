@@ -95,27 +95,25 @@ var additionalNeeds = pm.variables.replaceIn("{{$randomProduct}}")
 pm.environment.set("additionalNeeds", additionalNeeds)
 ```
   **Request Body:** 
- ```console 
-  {
-	  "firstname" : "{{firstName}}",
-	  "lastname" : "{{lastName}}",
-	  "totalprice" : {{totalPrice}},
-	  "depositpaid" : {{depositPaid}},
-	  "bookingdates" : {
-    	  "checkin" : "{{checkin}}",
-    	  "checkout" : "{{checkout}}"
-	  },
-	  "additionalneeds" : "{{additionalNeeds}}"
-  }
+ ```console
+{
+ "firstname" : "{{firstName}}",
+ "lastname" : "{{lastName}}",
+ "totalprice" : {{totalPrice}},
+ "depositpaid" : {{depositPaid}},
+ "bookingdates" : {
+   "checkin" : "{{checkin}}",
+   "checkout" : "{{checkout}}"
+  },
+ "additionalneeds" : "{{additionalNeeds}}"
+}
 ```
   **Tests:**
  ```console
 var jsonData = pm.response.json()
-
 pm.environment.set("id", jsonData.bookingid)
 
 var responseCode = pm.response.code
-
 if(responseCode == 200){
     pm.test("Booking Data Created Successfully", function(){
         pm.response.to.have.status(200);
@@ -126,7 +124,7 @@ if(responseCode == 200){
 ```
   **Response Body:**
  ```console 
-  {
+{
     "bookingid": 5326,
     "booking": {
         "firstname": "Ulises",
@@ -263,18 +261,18 @@ var additionalNeeds = pm.variables.replaceIn("{{$randomProduct}}")
 pm.environment.set("additionalNeeds", additionalNeeds)
 ```
   **Request Body:** 
- ```console 
-  {
-	  "firstname" : "{{firstName}}",
-	  "lastname" : "{{lastName}}",
-	  "totalprice" : {{totalPrice}},
-	  "depositpaid" : {{depositPaid}},
-	  "bookingdates" : {
-    	  "checkin" : "{{checkin}}",
-    	  "checkout" : "{{checkout}}"
-	  },
-	  "additionalneeds" : "{{additionalNeeds}}"
-  }
+ ```console
+{
+"firstname" : "{{firstName}}",
+"lastname" : "{{lastName}}",
+"totalprice" : {{totalPrice}},
+"depositpaid" : {{depositPaid}},
+"bookingdates" : {
+  "checkin" : "{{checkin}}",
+  "checkout" : "{{checkout}}"
+   },
+"additionalneeds" : "{{additionalNeeds}}"
+}
 ```
   **Tests:** 
  ```console
@@ -439,7 +437,7 @@ else
 ## _**7. Check After The Partial Update**_
 
 ### Request URL: https://restful-booker.herokuapp.com/booking/bookingid
-### Request Method: PATCH
+### Request Method: GET
 ### Pre-request Script: None
 ### Request Body: None
 ### Tests:
@@ -521,7 +519,7 @@ pm.test("Something went wrong. Please check it")
 ## _**8. Delete Booking Record**_
 
 ### Request URL: https://restful-booker.herokuapp.com/booking/bookingid
-### Request Method: PATCH
+### Request Method: DELETE
 ### Pre-request Script: None
 ### Request Body: None
 ### Tests: None
@@ -529,7 +527,7 @@ pm.test("Something went wrong. Please check it")
 ## _**9. Check After The Delete**_
 
 ### Request URL: https://restful-booker.herokuapp.com/booking/bookingid
-### Request Method: PATCH
+### Request Method: GET
 ### Pre-request Script: None
 ### Request Body: None
 ### Tests:
